@@ -1,15 +1,18 @@
 require("dotenv").config();
 const debug = require("debug")("things:root");
-const express = require("express");
-const morgan = require("morgan");
+
+const connectToDataBase = require("./db");
+const serverUp = require("./server/index");
 
 const port = process.env.SERVER_PORT || 4000;
+const mongoConnection = process.env.LOGIN_DB_STRING;
 
-const app = express();
-
-(() => {
-  app.listen(port);
-  debug("que dices loco");
-  debug(`Server listening on http://localhost:${port}`);
-  app.use(morgan("dev"));
+(async () => {
+  try {
+    await serverUp(port);
+    await connectToDataBase(mongoConnection);
+    debug("que dices loco");
+  } catch (error) {
+    debug(`Error: ${error.message}`);
+  }
 })();
