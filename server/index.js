@@ -9,6 +9,9 @@ const serverUp = (port) =>
   new Promise((resolve, reject) => {
     const server = app.listen(port, () => {
       debug(`Server listening on http://localhost:${port}`);
+      debug(
+        `Check the list of things I know at http://localhost:${port}/things/list `
+      );
       resolve();
     });
 
