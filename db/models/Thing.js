@@ -5,9 +5,6 @@ const ThingSchema = new Schema({
     type: String,
     required: true,
   },
-  age: {
-    known: Boolean,
-  },
 });
 
 const Thing = model("Thing", ThingSchema, "things_");
